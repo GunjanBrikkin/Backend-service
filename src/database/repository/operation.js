@@ -1,39 +1,59 @@
 const mongoose = require("mongoose");
-const {commonSchema} = require("../models/index");
-const {ResponseMessage,ResponseStatus} = require("../../Utils/index")
+const { commonSchema } = require("../models/index");
+const { ResponseMessage, ResponseStatus } = require("../../Utils/index");
+
 
 const checkMailExisted = async (email) => {
-    try{
+    try {
 
         const query = [];
+        const verificationStore = {};
 
         const matchingStage = {
-            $match:{
-                email:email
+            $match: {
+                email: email
             }
         };
 
         query.push(matchingStage);
 
-        console.log("query",query)
+        console.log("query", query)
 
-    const checkData = await commonSchema.aggregate(query);
-    console.log("checkData",checkData);
+        const checkData = await commonSchema.aggregate(query);
+        console.log("checkData", checkData);
 
-     if(checkData.length === 0){
-        var status , message , data;
+        if (checkData.length !== 0) {
+            var status, message, data;
 
-        message = await ResponseMessage("emailAlreadyExisted");
-        status = await ResponseStatus("BAD_REQUEST");
-        data = [];
+            message = await ResponseMessage("emailAlreadyExisted");
+            status = await ResponseStatus("BAD_REQUEST");
+            data = checkData;
 
-        return [status,message,data];
-     }
+            return [status, message, data];
+        }
 
-        
-    }catch(error){
-        console.log("error while the operation function !!",error);
+        return false;
+
+    } catch (error) {
+        console.log("error while the operation function !!", error);
     }
 }
 
-module.exports= {checkMailExisted}
+const newRecordEntry = async (formData) => {
+    try {
+
+        const instance = new commonSchema(formData);
+        const data = await instance.save();
+
+        console.log("data", data)
+
+        if (data) { return true; }
+
+    } catch (error) {
+        console.log("error while the operation function !!", error);
+        return false;
+    }
+}
+
+module.exports = { checkMailExisted, newRecordEntry }
+

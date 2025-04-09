@@ -1,0 +1,1 @@
+{"first_name":"aditya","last_name":"naiyre","email":"gunjan.brikkin@gmail.com","password":"123456","role_code":"101","role_name":"Customer"}
