@@ -5,14 +5,25 @@ the project structure look like this ,
 
 ![image](https://github.com/user-attachments/assets/9bd67210-ec2d-4983-96a6-0ccdf1990ba5)
 
-code flow start to index.js file ,
-all the business operation are perform on Service folder ,
-all the database relared stuff are in database folder like connection , schema , communication with mongo DB , also had sub folder like models , repository .
-my Routes folder has a 4 APIs ,
-i also made a index.js for Utils and Config folder ,
-.env is for private information which i do not incluse here because it had a sentive password for my account 
+🧭 Project Structure & Code Flow
 
-following is screen short of my local system in postmen , 
+The entry point of this project is the index.js file. From here, the application is bootstrapped and everything else connects smoothly.
+
+ All the business logic is neatly organized inside the Service folder — this is where the real magic happens!
+
+ Anything related to MongoDB, like database connection, schemas, and queries, lives inside the database folder. This folder is further structured into helpful subfolders:
+
+models/ – defines the schema structure
+
+repository/ – handles database communication (like find, create, update operations)
+
+- The Routes folder contains 4 main API endpoints that handle registration, login, and verification functionality.
+
+- I’ve also created a centralized index.js inside both the Utils and Config folders for organizing reusable utilities and configurations.
+
+- .env file is used for managing private credentials and environment variables like database URIs and email passwords. For security reasons, it’s excluded from the repo.
+
+📷 Below is a screenshot from my local system using Postman, where I tested all APIs successfully.
 
 ![image](https://github.com/user-attachments/assets/13777bc7-84d2-4a31-b5a9-49fdcd3622ab)
 ![image](https://github.com/user-attachments/assets/9cb77151-57ba-4f2c-9068-3dd201a5ad9d)
